@@ -57,5 +57,22 @@
 
     After submiitting you will recive response related to the request.(Try giving both the regions mentioned above to see the difference in response)
 	
-	
-	
+3) You can also test from the swagger by using  http://64.225.28.35:3000/api-docs/  
+   in similar manner to the above.
+   First use http://64.225.28.35:3000/api/v1/token  enter the details as below 
+   {
+	"name": "Anoop",
+	"securecode": "system"
+     }
+
+	 get the token from the response.
+
+	 Second use http://64.225.28.35:3000/api/v1/BingEntitySearch enter details as per the below example or change accordingly 
+
+	 Example: 
+
+	{
+	"Authorization": This value should be the token from above output.
+	"Region": "en-US",or "en-IN"
+	"Word": "Anoop"
+    }
