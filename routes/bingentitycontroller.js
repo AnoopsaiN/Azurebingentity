@@ -29,13 +29,35 @@ const check = function(req,res,next){
 
 } 
 
+/**
+* @swagger
+* /api/v1/Search:
+*   post:
+*     description: this route will search for the content with the parameters given
+*     parameters:
+ *       - name: Authorization
+ *         in: header
+ *         type: string
+ *         required: true
+ *       - name: Region
+ *         in: formData
+ *         type: string
+ *         required: true  
+ *       - name: Word
+ *         in: formData
+ *         type: string
+ *         required: true   
+*     responses:
+*       '200':
+*         description: OK
+*/
 
-router.get("/Search",urlencodedParser,check,function(req,res){
+router.post("/BingEntitySearch",urlencodedParser,check,function(req,res){
 
 let host = 'api.cognitive.microsoft.com';
 let path = '/bing/v7.0/entities';
-let mkt = req.body.mkt;
-let q = req.body.q;
+let mkt = req.body.Region;
+let q = req.body.Word;
 
 
 let query = '?mkt=' + mkt + '&q=' + encodeURI(q) ; 
@@ -70,7 +92,26 @@ let requ = https.request (request_params, response_handler);
 });
 
 
-router.get('/token',function(req,res){
+
+/**
+* @swagger
+* /api/v1/token:
+*   post:
+*     description: this will generate intial token
+*     parameters:
+ *       - name: name
+ *         in: formData
+ *         type: string
+ *         required: true  
+ *       - name: securecode
+ *         in: formData
+ *         type: string
+ *         required: true   
+*     responses:
+*       '200':
+*         description: OK
+*/
+router.post('/token',function(req,res){
     //console.log(req.body.name);
     
    var  name = req.body.name;
