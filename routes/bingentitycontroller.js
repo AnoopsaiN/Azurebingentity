@@ -54,7 +54,7 @@ const check = function(req,res,next){
 
 router.post("/BingEntitySearch",urlencodedParser,check,function(req,res){
 
-let host = 'anoop.cognitiveservices.azure.com';
+let host = 'api.cognitive.microsoft.com';
 let path = '/bing/v7.0/entities';
 let mkt = req.body.Region;
 let q = req.body.Word;
@@ -70,7 +70,7 @@ let request_params = {
     path : path + query,
     headers : {
         'Content-Type': 'application/json',
-        'Ocp-Apim-Subscription-Key' : '547f274d175a40279f20b2e3b80d7383',
+        'Ocp-Apim-Subscription-Key' : '2bf81b2765a848bca6eaa76e113d9fd5',
     }
 };
 let response_handler = function (response) {
