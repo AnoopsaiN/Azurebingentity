@@ -8,7 +8,7 @@ var bodyParser = require("body-parser");
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 
-
+//verify the token obatined from previous api
 const check = function(req,res,next){
     console.log("inside function check: ",req.headers);
     var header = req.headers['authorization'];
@@ -31,7 +31,7 @@ const check = function(req,res,next){
 
 /**
 * @swagger
-* /api/v1/Search:
+* /api/v1/BingEntitySearch:
 *   post:
 *     description: this route will search for the content with the parameters given
 *     parameters:
@@ -52,6 +52,7 @@ const check = function(req,res,next){
 *         description: OK
 */
 
+//Main route which is linked to entity search
 router.post("/BingEntitySearch",urlencodedParser,check,function(req,res){
 
 let host = 'api.cognitive.microsoft.com';
@@ -73,6 +74,8 @@ let request_params = {
         'Ocp-Apim-Subscription-Key' : '2bf81b2765a848bca6eaa76e113d9fd5',
     }
 };
+    
+//response handler 
 let response_handler = function (response) {
     let body = '';
 
@@ -86,6 +89,7 @@ let response_handler = function (response) {
         });
 };
 
+    //request send to azure api
 let requ = https.request (request_params, response_handler);
         requ.end ();
 
@@ -111,6 +115,8 @@ let requ = https.request (request_params, response_handler);
 *       '200':
 *         description: OK
 */
+
+//to generate the token which is valid for 6 minutes
 router.post('/token',function(req,res){
     //console.log(req.body.name);
     
